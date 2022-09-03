@@ -1,85 +1,138 @@
-﻿int FindDigNum (int num) {    // finding the number of sign. digits of the number
-   int dig = 0;
+﻿// Aux methods =============
 
-   while (num > 0) {
-      num /= 10;
-      dig++;
-   }
-
-   return dig;
-}
-
-int DigAtPos (int num, int pos) {  // returns the digit at the position, beginning from least sign. digit, numbering from 0
-   return num / (Convert.ToInt32(Math.Pow(10, pos))) % 10;
-}
-
-void PrintArr (int [] a) {
+void PrintArr (int [] a) { // prints the integer array
    int len = a.Length;
    for (int i = 0; i < len; i++) {
       Console.Write($"{a[i]} ");
    }
-   Console.WriteLine();
+   Console.WriteLine("");
 }
 
-int DegreeOf (int num, int exp) { // calculates only positive values of the degree
-   if (exp < 0) return -1;
-   if (exp == 0) return 1;
-   for (int i = 1; i < exp; i++) num *= num;
-   return num;
+int [] CreateRandArray (int size, int minVal, int maxVal) { // creates an array of integer values
+   int [] a = new int [size];
+   
+   for (int i = 0; i < size; i++) {
+      
+      a[i] = new Random().Next(minVal, maxVal);
+   }
+   return a;
 }
 
-int DigSum (int num) { // returns the sum of digits
+double [] CreateRandDblArr (int size, double minVal, double maxVal) {
+   double [] a = new double [size];
+
+   double factor = maxVal - minVal;
+
+   for (int i = 0; i < size; i++)
+      a[i] = new Random().NextDouble() * factor + minVal;
+   
+   return a;   
+}
+
+void PrintDblArr (double [] a) {
+   int len = a.Length;
+   for (int i = 0; i < len; i++) {
+      Console.WriteLine($"{a[i]} ");
+   }
+}
+
+// Task methods =============
+
+int EvenNum (int [] a) { // returns the number of even elements
    int res = 0;
-   int len = FindDigNum(num);
 
-   for (int i = 0; i < len; i++)
-      res += DigAtPos(num, i);
+   for (int i = 0; i < a.Length; i++)
+      if (a[i] % 2 == 0) res++;
    
    return res;
 }
 
-int [] EnterArr() {
-   Console.Write("Please enter the size of the array: ");
-   int size = Convert.ToInt32(Console.ReadLine());
+int OddElSum (int [] a) {
+   int res = 0;
+   for (int i = 1; i < a.Length; i += 2)
+      res += a[i];
    
-   Console.WriteLine("Please enter the element values: ");
-   int [] arr = new int [size];
-   for (int i = 0; i < size; i++) {
-      Console.Write($"Element {i}: ");
-      arr[i] = Convert.ToInt32(Console.ReadLine());
-   }
-   
-   return arr;
+   return res;
+}
+
+double MinDblVal (double [] a) {
+   double res = a[0];
+   if (a.Length < 2) return res;
+
+   for (int i = 1; i < a.Length; i++)
+      if (a[i] < res) res = a[i];
+
+   return res;
+}
+
+double MaxDblVal (double [] a) {
+   double res = a[0];
+   if (a.Length < 2) return res;
+
+   for (int i = 1; i < a.Length; i++)
+      if (a[i] > res) res = a[i];
+
+   return res;
 }
 
 Console.Clear();
-Console.Write("Please enter the task number {25, 27, 29}: ");
+Console.Write("Please enter the task number {34, 36, 38}: ");
 int taskNum = Convert.ToInt32(Console.ReadLine());
-int num; // entering number for tasks
+// entering numbers and arrays for tasks
+int num;
+int size; // size of the array
+int [] arr;
 
 switch (taskNum) {
-   case 25: {
-      Console.Write("Please enter a number: ");
+   case 34: {
+      Console.Write("Please enter the size of the array: ");
       num = Convert.ToInt32(Console.ReadLine());
-      Console.Write("Please enter a degree: ");
-      int deg = Convert.ToInt32(Console.ReadLine());
       
-      Console.WriteLine($"The exponential number is {DegreeOf(num, deg)}");
-      break;
-   }
-
-   case 27: {
-      Console.Write("Please enter a number: ");
-      num = Convert.ToInt32(Console.ReadLine());
-
-      Console.WriteLine($"The sum of digits: {DigSum(num)}");
-      break;
-   }
-
-   case 29: {
-      int [] arr = EnterArr();
-      Console.WriteLine("The entered array:");
+      arr = CreateRandArray(num, 100, 999);
+      Console.WriteLine("Generated array:");
       PrintArr(arr);
+
+      Console.WriteLine($"The number is odd elements is {EvenNum(arr)}");
+      break;
+   }
+
+   case 36: {
+      Console.Write("Please enter the size of the array: ");
+      size = Convert.ToInt32(Console.ReadLine());
+
+      Console.Write("Enter min scope: ");
+      int min = Convert.ToInt32(Console.ReadLine());
+
+      Console.Write("Enter max scope: ");
+      int max = Convert.ToInt32(Console.ReadLine());   
+ 
+      arr = CreateRandArray(size, min, max);
+      Console.WriteLine("Generated array:");
+      PrintArr(arr);
+
+      Console.WriteLine($"The sum of the elements at odd positions: {OddElSum(arr)}");
+      break;
+   }
+
+   case 38: {
+      Console.Write("Please enter the size of the array: ");
+      size = Convert.ToInt32(Console.ReadLine());
+
+      Console.Write("Enter min scope: ");
+      double minDbl = Convert.ToDouble(Console.ReadLine());
+
+      Console.Write("Enter max scope: ");
+      double maxDbl = Convert.ToDouble(Console.ReadLine());   
+      
+      double [] dblArr = CreateRandDblArr(size, minDbl, maxDbl);
+      Console.WriteLine("Generated array:");
+      PrintDblArr(dblArr);
+
+      minDbl = MinDblVal(dblArr);
+      maxDbl = MaxDblVal(dblArr);
+      Console.WriteLine(minDbl);
+      Console.WriteLine(maxDbl);
+      Console.WriteLine($"The difference between min and max values is {maxDbl - minDbl}");
       break;
    }
 

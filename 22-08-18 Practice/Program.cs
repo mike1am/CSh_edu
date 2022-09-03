@@ -13,9 +13,10 @@ else {
 }
 */
 
-/*
+
 Console.Write("Please, enter a possitive integer number: ");
 int num = Convert.ToInt32(Console.ReadLine());
+//int num = 10;
 
 int i = num * (-1);
 
@@ -23,11 +24,11 @@ while (i <= num) {
     Console.Write(i + " ");
     i++;
 }
-*/
-
+/*
 Console.Write("Please, enter a possitive integer number: ");
 int num = Convert.ToInt32(Console.ReadLine());
 
 int lastDig = num % 10;
 
 Console.Write($"The last digit is {lastDig}");
+*/

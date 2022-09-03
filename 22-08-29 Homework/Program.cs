@@ -16,9 +16,9 @@ int DigAtPos (int num, int pos) {  // returns the digit at the position, beginni
 void PrintArr (int [] a) {
    int len = a.Length;
    for (int i = 0; i < len; i++) {
-      Console.Write($"{a[i]}, ");
+      Console.Write($"{a[i]} ");
    }
-   Console.WriteLine("\b\b");
+   Console.WriteLine("");
 }
 
 int DegreeOf (int num, int exp) { // calculates only positive values of the degree

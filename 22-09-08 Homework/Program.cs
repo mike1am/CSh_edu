@@ -39,21 +39,6 @@ int [,] CreateUser2dArray () {
       return array;
 }
 
-/*
-int [] EnterArray() {
-   Console.Write("Please enter the size of the array: ");
-   int size = Convert.ToInt32(Console.ReadLine());
-   
-   Console.WriteLine("Please enter the element values: ");
-   int [] arr = new int [size];
-   for (int i = 0; i < size; i++) {
-      Console.Write($"Element {i}: ");
-      arr[i] = Convert.ToInt32(Console.ReadLine());
-   }
-   
-   return arr;
-}
-*/
 void PrintDblArray (double [] a) {
    int len = a.Length;
    for (int i = 0; i < len; i++) {
